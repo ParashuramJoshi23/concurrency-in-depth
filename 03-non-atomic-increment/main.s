@@ -1,49 +1,18 @@
-	.file	"main.c"
-	.text
-	.globl	count
-	.bss
-	.align 4
-	.type	count, @object
-	.size	count, 4
-count:
-	.zero	4
-	.text
-	.globl	main
-	.type	main, @function
-main:
-.LFB0:
+	.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 15, 0	sdk_version 15, 2
+	.globl	_main                           ; -- Begin function main
+	.p2align	2
+_main:                                  ; @main
 	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movl	count(%rip), %eax
-	addl	$1, %eax
-	movl	%eax, count(%rip)
-	movl	$0, %eax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
+; %bb.0:
+	adrp	x9, _count@PAGE
+	ldr	w8, [x9, _count@PAGEOFF]
+	add	w8, w8, #1
+	str	w8, [x9, _count@PAGEOFF]
+	mov	w0, #0                          ; =0x0
 	ret
 	.cfi_endproc
-.LFE0:
-	.size	main, .-main
-	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
-	.section	.note.GNU-stack,"",@progbits
-	.section	.note.gnu.property,"a"
-	.align 8
-	.long	 1f - 0f
-	.long	 4f - 1f
-	.long	 5
-0:
-	.string	 "GNU"
-1:
-	.align 8
-	.long	 0xc0000002
-	.long	 3f - 2f
-2:
-	.long	 0x3
-3:
-	.align 8
-4:
+                                        ; -- End function
+	.globl	_count                          ; @count
+.zerofill __DATA,__common,_count,4,2
+.subsections_via_symbols
