@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "build",
+			"command": "gcc",
+			"args": [
+				"main.c",
+				"-o",
+				"a.out"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/03-non-atomic-increment"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "silent"
+			}
+		}
+	]
+}
